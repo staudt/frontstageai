@@ -1,0 +1,49 @@
+app:
+  name: "Palm Reader"
+  description: "Discover your destiny through the lines of your palm"
+  template: "mystic"
+  brand:
+    primaryColor: "#8B5CF6"
+    secondaryColor: "#1E1B4B"
+
+input:
+  type: "camera"
+  label: "Show Me Your Palm"
+  instructions: "Hold your hand up with fingers spread, palm facing the camera"
+  cameraFacing: "environment"
+
+ai:
+  provider: "openai"
+  model: "gpt-4o"
+  systemPrompt: |
+    You are a mystical palm reader with deep knowledge of palmistry.
+    You speak in an engaging, mystical but warm tone. You are insightful
+    and encouraging. Always find something positive to say.
+  prompt: |
+    Analyze this palm image carefully. Look at the major lines (heart line,
+    head line, life line, fate line) and the overall shape of the hand.
+    Provide a mystical but grounded reading.
+  temperature: 0.8
+  maxTokens: 2048
+  output:
+    type: "sections"
+    sections:
+      - key: "lifeLine"
+        title: "The Life Line"
+        icon: "heart"
+      - key: "heartLine"
+        title: "The Heart Line"
+        icon: "sparkle"
+      - key: "headLine"
+        title: "The Head Line"
+        icon: "eye"
+      - key: "fateLine"
+        title: "The Fate Line"
+        icon: "compass"
+      - key: "destiny"
+        title: "Your Destiny"
+        icon: "star"
+
+output:
+  style: "card"
+  shareEnabled: true

@@ -1,0 +1,29 @@
+app:
+  name: "Tone Shifter"
+  description: "Rewrite any text in a different tone"
+  template: "default"
+
+input:
+  type: "text"
+  label: "Paste Your Text"
+  placeholder: "Enter the text you want to transform..."
+  instructions: "We'll rewrite it in a more professional, polished tone"
+
+ai:
+  provider: "anthropic"
+  model: "claude-sonnet-4-20250514"
+  prompt: |
+    The user wants to transform the following text into a more professional,
+    polished tone while keeping the core message intact:
+
+    {{input}}
+
+    Rewrite it with a professional tone. Return only the rewritten text.
+  temperature: 0.5
+  maxTokens: 1024
+  output:
+    type: "markdown"
+
+output:
+  style: "fullwidth"
+  shareEnabled: true

@@ -1,0 +1,37 @@
+app:
+  name: "Product Analyzer"
+  description: "Get instant product insights from a photo"
+  template: "default"
+  brand:
+    primaryColor: "#059669"
+    secondaryColor: "#064E3B"
+
+input:
+  type: "upload"
+  label: "Upload a Product Photo"
+  instructions: "Take a clear photo of any product packaging"
+
+ai:
+  provider: "openai"
+  model: "gpt-4o"
+  prompt: |
+    Analyze this product image. Identify the product and provide useful
+    consumer information.
+  temperature: 0.7
+  maxTokens: 1024
+  output:
+    type: "sections"
+    sections:
+      - key: "product"
+        title: "Product Identified"
+        icon: "eye"
+      - key: "details"
+        title: "Key Details"
+        icon: "sparkle"
+      - key: "verdict"
+        title: "Our Verdict"
+        icon: "star"
+
+output:
+  style: "card"
+  shareEnabled: false

@@ -1,0 +1,122 @@
+@import "tailwindcss";
+
+/* --- Base CSS Custom Properties --- */
+:root {
+  --color-primary: #6366F1;
+  --color-secondary: #1E1B4B;
+  --color-bg: #FFFFFF;
+  --color-bg-card: #F9FAFB;
+  --color-text: #111827;
+  --color-text-muted: #6B7280;
+  --color-border: #E5E7EB;
+  --font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  --radius: 0.75rem;
+}
+
+/* --- Default template --- */
+[data-template="default"] {
+  --color-primary: #6366F1;
+  --color-secondary: #4F46E5;
+  --color-bg: #FFFFFF;
+  --color-bg-card: #F9FAFB;
+  --color-text: #111827;
+  --color-text-muted: #6B7280;
+  --color-border: #E5E7EB;
+}
+
+/* --- Mystic template (palm reader) --- */
+[data-template="mystic"] {
+  --color-primary: #8B5CF6;
+  --color-secondary: #6D28D9;
+  --color-bg: #0F0A1F;
+  --color-bg-card: rgba(139, 92, 246, 0.08);
+  --color-text: #E8E0F0;
+  --color-text-muted: #A78BFA;
+  --color-border: rgba(139, 92, 246, 0.2);
+}
+
+[data-template="mystic"] body {
+  background-image:
+    radial-gradient(ellipse at 20% 50%, rgba(139, 92, 246, 0.08) 0%, transparent 50%),
+    radial-gradient(ellipse at 80% 20%, rgba(109, 40, 217, 0.06) 0%, transparent 50%);
+}
+
+/* --- Base styles --- */
+body {
+  font-family: var(--font-family);
+  background-color: var(--color-bg);
+  color: var(--color-text);
+  margin: 0;
+  min-height: 100vh;
+}
+
+/* --- Component utilities --- */
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.75rem 1.5rem;
+  border-radius: var(--radius);
+  font-weight: 600;
+  color: white;
+  background-color: var(--color-primary);
+  border: none;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.btn-primary:hover {
+  filter: brightness(1.1);
+}
+
+.btn-primary:active {
+  transform: scale(0.97);
+}
+
+.btn-primary:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.75rem 1.5rem;
+  border-radius: var(--radius);
+  font-weight: 600;
+  color: var(--color-text);
+  background-color: var(--color-bg-card);
+  border: 1px solid var(--color-border);
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.btn-secondary:hover {
+  filter: brightness(0.95);
+}
+
+.btn-secondary:active {
+  transform: scale(0.97);
+}
+
+.result-card {
+  background-color: var(--color-bg-card);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+}
+
+[data-template="mystic"] .result-card {
+  backdrop-filter: blur(12px);
+  box-shadow: 0 0 30px rgba(139, 92, 246, 0.1);
+}
+
+/* --- Loading animation --- */
+@keyframes pulse-glow {
+  0%, 100% { opacity: 0.5; transform: scale(1); }
+  50% { opacity: 1; transform: scale(1.05); }
+}
+
+.loading-pulse {
+  animation: pulse-glow 2s ease-in-out infinite;
+}
