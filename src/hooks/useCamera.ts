@@ -39,20 +39,36 @@ export function useCamera({ facingMode }: UseCameraOptions) {
     }
   }, []);
 
-  const capture = useCallback((): {
+  const capture = useCallback((aspectRatio = 3 / 4): {
     base64: string;
     mimeType: string;
   } | null => {
     if (!videoRef.current || !isReady) return null;
 
+    const vw = videoRef.current.videoWidth;
+    const vh = videoRef.current.videoHeight;
+
+    // Crop to match the visible area (object-cover behavior)
+    let sx = 0, sy = 0, sw = vw, sh = vh;
+    const videoAspect = vw / vh;
+    if (videoAspect > aspectRatio) {
+      // Video is wider — crop sides
+      sw = Math.round(vh * aspectRatio);
+      sx = Math.round((vw - sw) / 2);
+    } else {
+      // Video is taller — crop top/bottom
+      sh = Math.round(vw / aspectRatio);
+      sy = Math.round((vh - sh) / 2);
+    }
+
     const canvas = document.createElement("canvas");
-    canvas.width = videoRef.current.videoWidth;
-    canvas.height = videoRef.current.videoHeight;
+    canvas.width = sw;
+    canvas.height = sh;
 
     const ctx = canvas.getContext("2d");
     if (!ctx) return null;
 
-    ctx.drawImage(videoRef.current, 0, 0);
+    ctx.drawImage(videoRef.current, sx, sy, sw, sh, 0, 0, sw, sh);
     const dataUrl = canvas.toDataURL("image/jpeg", 0.85);
     const base64 = dataUrl.split(",")[1];
 

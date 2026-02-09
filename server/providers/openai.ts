@@ -8,7 +8,8 @@ export class OpenAIProvider extends BaseProvider {
 
   constructor() {
     super();
-    this.client = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
+    // SDK v5 auto-reads OPENAI_API_KEY from process.env
+    this.client = new OpenAI();
   }
 
   async run(request: AIRequest): Promise<AIResponse> {

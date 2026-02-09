@@ -87,11 +87,13 @@ export default function CameraCapture({ config, onCapture }: Props) {
         </>
       ) : (
         <>
-          <img
-            src={preview}
-            alt="Captured"
-            className="w-full max-w-md rounded-2xl"
-          />
+          <div className="w-full max-w-md aspect-[3/4] rounded-2xl overflow-hidden">
+            <img
+              src={preview}
+              alt="Captured"
+              className="w-full h-full object-cover"
+            />
+          </div>
           <div className="flex gap-4">
             <button onClick={handleRetake} className="btn-secondary">
               Retake

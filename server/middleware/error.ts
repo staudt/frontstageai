@@ -21,7 +21,7 @@ export function errorHandler(
   if (err.message?.includes("API key")) {
     res.status(401).json({
       success: false,
-      error: "Missing or invalid API key. Check your .env file.",
+      error: err.message,
     });
     return;
   }

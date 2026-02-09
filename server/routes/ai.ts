@@ -93,6 +93,7 @@ aiRouter.post("/run", async (req, res, next) => {
       },
     });
   } catch (err) {
+    console.error("[/api/run error]", err);
     next(err);
   }
 });

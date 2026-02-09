@@ -6,10 +6,13 @@ import { configRouter } from "./routes/config.js";
 import { aiRouter } from "./routes/ai.js";
 import { errorHandler } from "./middleware/error.js";
 
-dotenv.config();
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
+dotenv.config({ path: path.resolve(__dirname, "../.env") });
 
 const app = express();
 const PORT = process.env.PORT || 3001;
+
+console.log("OPENAI_API_KEY loaded:", !!process.env.OPENAI_API_KEY);
 
 // Parse JSON bodies up to 20MB (for base64 images)
 app.use(express.json({ limit: "20mb" }));
